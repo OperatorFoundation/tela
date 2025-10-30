@@ -10,3 +10,8 @@ int ArduinoClock::now()
 {
   return millis();
 }
+
+void ArduinoClock::wait(int durationInMilliseconds)
+{
+  delay(durationInMilliseconds);
+}

@@ -13,6 +13,7 @@ class ArduinoClock : public Clock
     ArduinoClock() = default;
 
     int now();
+    void wait(int durationInMilliseconds); // milliseconds
 };
 
 #endif //ARDUINOCLOCK_H
