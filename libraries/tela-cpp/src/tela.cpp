@@ -294,12 +294,12 @@ int redraw(VTermRect rect, void *user)
       if(cellFilled && cell.chars[0] != 0)
       {
         Tela::instance->logger.debugf("redraw:%c %d,%d", cell.chars[0], col, row);
-        Tela::instance->canvas.drawCharacter(col + 1, row + 1, cell.chars[0]);
+        Tela::instance->canvas.drawCharacter(col, row, cell.chars[0]);
       }
       else
       {
         Tela::instance->logger.debugf("redraw:(empty) %d,%d", col, row);
-        Tela::instance->canvas.drawCharacter(col + 1, row + 1, ' ');
+        Tela::instance->canvas.drawCharacter(col, row, ' ');
       }
     }
   }
