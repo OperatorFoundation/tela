@@ -115,6 +115,16 @@ void Cursor::update()
 
       // Toggle blink phase
       blinking_visible = !blinking_visible;
+
+      // Actually show or hide the cursor
+      if(blinking_visible)
+      {
+        show();
+      }
+      else
+      {
+        hide();
+      }
     }
   }
 }
