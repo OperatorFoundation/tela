@@ -20,8 +20,8 @@ Tela::Tela(Canvas& canvas, Connection* connection, Clock& clock, Logger& logger,
 // Therefore, this should be called at the end of setup().
 void Tela::begin()
 {
-  int cols = canvas.getHeight() - 3;
-  int rows = canvas.getWidth() - 3;
+  int cols = canvas.getHeight();
+  int rows = canvas.getWidth();
 
   logger.infof("vterm_new(%d, %d)", cols, rows);
 
