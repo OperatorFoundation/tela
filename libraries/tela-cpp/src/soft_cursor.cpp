@@ -52,12 +52,9 @@ void SoftCursor::hide()
     VTermScreenCell cell;
     VTermPos pos = {.row = row, .col = col};
 
-    // If being forced invisible during scroll, the character that was
-    // under the cursor has moved. Don't try to restore - it's already gone.
     if(force_invisible)
     {
-      // Just clear, don't restore. The content has moved.
-      return;
+      pos = {.row = row - 1, .col = col};
     }
 
     int result = vterm_screen_get_cell(screen, pos, &cell);
