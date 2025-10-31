@@ -67,7 +67,8 @@ void LGFXCanvas::drawCharacter(int16_t x, int16_t y, char c)
   }
   else
   {
-    screen->drawChar(x * char_width, y * char_height, c, TFT_BLACK, fg_color, 1);
+    //screen->drawChar(x * char_width, y * char_height, c, TFT_BLACK, fg_color, 1);
+    screen->drawChar(x * char_width, y * char_height, c, TFT_WHITE, TFT_BLACK, 1);
   }
 }
 
