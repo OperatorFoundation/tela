@@ -39,6 +39,15 @@ void SoftCursor::hide()
 {
   logger.debugf("SoftCursor::hide@(%d,%d)", col, row);
 
+  int char_width = canvas.getCharWidth();
+  int char_height = canvas.getCharHeight();
+  int pixel_x = col * char_width;
+  int pixel_y = row * char_height;
+
+  // First, clear the entire cursor area with black
+  canvas.clearRect(pixel_x, pixel_y, char_width, char_height);
+
+  // Then redraw the character that should be there
   if(screen)
   {
     VTermScreenCell cell;
@@ -54,7 +63,6 @@ void SoftCursor::hide()
     }
   }
 
-  // Fallback: clear the cell
-  logger.debugf("SoftCursor::hide - clearing cell");
-  canvas.drawCharacter(col, row, ' ');
+  // If no character, it's already cleared (black rectangle drawn above)
+  logger.debugf("SoftCursor::hide - cell cleared");
 }

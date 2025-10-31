@@ -49,6 +49,7 @@ class LGFXCanvas : public Canvas
     int getCharWidth() override;
     int getCharHeight() override;
     uint16_t getFgColor() override;
+    void clearRect(int x, int y, int w, int h) override;
     void fillRect(int x, int y, int w, int h, uint16_t color) override;
 
     int move(int sourceStartX, int sourceStartY, int sourceEndX, int sourceEndY, int destStartX, int destStartY, int destEndX, int destEndY) override;
