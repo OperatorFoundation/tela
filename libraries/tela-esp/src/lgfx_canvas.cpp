@@ -20,7 +20,7 @@ LGFXCanvas::~LGFXCanvas()
 bool LGFXCanvas::begin(lgfx::LGFX_Device* newScreen)
 {
   screen = newScreen;
-  setFont(0);
+  //setFont(0);
   //screen->setTextSize(1);
   screen->setTextWrap(false);
   clear();
