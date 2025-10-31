@@ -237,7 +237,7 @@ void Tela::setTitle(std::string newTitle)
     // Erase old title, in the case the new title is shorter and doesn't completely overwrite the old title
     for(int i = 0; i < title.size(); i++)
     {
-      canvas.drawCharacter(0, i + 1, ' ');
+      canvas.drawCharacter(0, i, ' ');
     }
   }
 
@@ -245,7 +245,7 @@ void Tela::setTitle(std::string newTitle)
 
   for(int i = 0; i < title.size(); i++)
   {
-    canvas.drawCharacter(0, i + 1, title.at(i));
+    canvas.drawCharacter(0, i, title.at(i));
   }
 }
 
@@ -319,7 +319,7 @@ int move_cursor(VTermPos pos, VTermPos oldpos, int visible, void *user)
 
   if(Tela::instance->cursor)
   {
-    Tela::instance->cursor->setPosition(pos.col + 1, pos.row + 1);
+    Tela::instance->cursor->setPosition(pos.col, pos.row);
   }
 
   Tela::instance->logger.debug("move_cursor end");
@@ -437,7 +437,7 @@ int move(VTermRect dest, VTermRect src, void *user)
     return 0;
   }
 
-  return Tela::instance->canvas.move(src.start_col + 1, src.start_row + 1, src.end_col + 1, src.end_row + 1, dest.start_col + 1, dest.start_row + 1, dest.end_col + 1, dest.end_row + 1);
+  return Tela::instance->canvas.move(src.start_col, src.start_row, src.end_col, src.end_row, dest.start_col, dest.start_row, dest.end_col, dest.end_row);
 }
 
 int pushline(int cols, const VTermScreenCell *cells, void *user)
