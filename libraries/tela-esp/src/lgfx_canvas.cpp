@@ -84,6 +84,32 @@ void LGFXCanvas::fill(uint16_t color)
   screen->fillScreen(color);
 }
 
+void LGFXCanvas::setFont(int fontNumber)
+{
+  if(screen == nullptr)
+  {
+    return;
+  }
+
+  switch(fontNumber)
+  {
+    case 0:
+      screen->setFont(&fonts::Font0);
+
+    case 1:
+      screen->setFont(&fonts::TomThumb);
+
+    case 2:
+      screen->setFont(&fonts::Font8x8C64);
+
+    case 3:
+      screen->setFont(&fonts::Font2);
+
+    default:
+      return;
+  }
+}
+
 void LGFXCanvas::clear()
 {
   if(screen == nullptr)
