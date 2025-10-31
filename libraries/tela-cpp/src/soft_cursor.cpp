@@ -42,7 +42,7 @@ void SoftCursor::hide()
   if(screen)
   {
     VTermScreenCell cell;
-    VTermPos pos = {.row = row - 1, .col = col - 1};
+    VTermPos pos = {.row = row, .col = col};
 
     int result = vterm_screen_get_cell(screen, pos, &cell);
 
