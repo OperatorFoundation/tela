@@ -23,6 +23,11 @@ class Canvas
     virtual void fill(uint16_t color) = 0;
     virtual void setFont(int fontNumber) = 0;
 
+    virtual int getCharWidth() = 0;
+    virtual int getCharHeight() = 0;
+    virtual uint16_t getFgColor() = 0;
+    virtual void fillRect(int x, int y, int w, int h, uint16_t color) = 0;
+
     virtual int move(int sourceStartX, int sourceStartY, int sourceEndX, int sourceEndY, int destStartX, int destStartY, int destEndX, int destEndY) = 0;
 };
 

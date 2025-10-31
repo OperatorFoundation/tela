@@ -9,9 +9,30 @@ SoftCursor::SoftCursor(Clock& clock, Canvas& canvas, Logger& logger) : Cursor(cl
 void SoftCursor::show()
 {
   logger.debugf("SoftCursor::show@(%d,%d)", col, row);
-  //Serial.println(col);
-  //Serial.println(row);
-  canvas.drawCharacter(col, row, '#');
+
+  int char_width = canvas.getCharWidth();
+  int char_height = canvas.getCharHeight();
+  int pixel_x = col * char_width;
+  int pixel_y = row * char_height;
+  uint16_t color = canvas.getFgColor();
+
+  switch(shape)
+  {
+    case block:
+      canvas.fillRect(pixel_x, pixel_y, char_width, char_height, color);
+      break;
+
+    case underline:
+    case underline_steady:
+      canvas.fillRect(pixel_x, pixel_y + char_height - 2, char_width, 2, color);
+      break;
+
+    case bar:
+    case bar_steady:
+    case bar_blinking:
+      canvas.fillRect(pixel_x, pixel_y, 2, char_height, color);
+      break;
+  }
 }
 
 void SoftCursor::hide()

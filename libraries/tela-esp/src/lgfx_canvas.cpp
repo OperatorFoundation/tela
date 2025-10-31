@@ -137,6 +137,29 @@ void LGFXCanvas::nextTheme()
   fg_color = themes[theme];
 }
 
+int LGFXCanvas::getCharWidth()
+{
+  return char_width;
+}
+
+int LGFXCanvas::getCharHeight()
+{
+  return char_height;
+}
+
+uint16_t LGFXCanvas::getFgColor()
+{
+  return fg_color;
+}
+
+void LGFXCanvas::fillRect(int x, int y, int w, int h, uint16_t color)
+{
+  if(screen != nullptr)
+  {
+    screen->fillRect(x, y, w, h, color);
+  }
+}
+
 int LGFXCanvas::move(int sourceStartX, int sourceStartY, int sourceEndX, int sourceEndY, int destStartX, int destStartY, int destEndX, int destEndY)
 {
   int src_x = sourceStartX * char_width;
