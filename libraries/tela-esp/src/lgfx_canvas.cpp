@@ -20,13 +20,10 @@ LGFXCanvas::~LGFXCanvas()
 bool LGFXCanvas::begin(lgfx::LGFX_Device* newScreen)
 {
   screen = newScreen;
-  screen->setFont(&fonts::Font2);
-  screen->setTextSize(1);
+  setFont(0);
+  //screen->setTextSize(1);
   screen->setTextWrap(false);
   clear();
-
-  char_width = screen->textWidth("M");
-  char_height = screen->fontHeight();
 
   return true;
 }
@@ -108,6 +105,9 @@ void LGFXCanvas::setFont(int fontNumber)
     default:
       return;
   }
+
+  char_width = screen->textWidth("M");
+  char_height = screen->fontHeight();
 }
 
 void LGFXCanvas::clear()
