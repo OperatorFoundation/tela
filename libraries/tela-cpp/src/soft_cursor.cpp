@@ -44,14 +44,21 @@ void SoftCursor::hide()
   int pixel_x = col * char_width;
   int pixel_y = row * char_height;
 
-  // First, clear the entire cursor area with black
+  // Always clear the cursor rectangle first
   canvas.clearRect(pixel_x, pixel_y, char_width, char_height);
 
-  // Then redraw the character that should be there
   if(screen)
   {
     VTermScreenCell cell;
     VTermPos pos = {.row = row, .col = col};
+
+    // If being forced invisible during scroll, the character that was
+    // under the cursor has moved. Don't try to restore - it's already gone.
+    if(force_invisible)
+    {
+      // Just clear, don't restore. The content has moved.
+      return;
+    }
 
     int result = vterm_screen_get_cell(screen, pos, &cell);
 
@@ -59,10 +66,6 @@ void SoftCursor::hide()
     {
       logger.debugf("SoftCursor::hide - redrawing char: %c", cell.chars[0]);
       canvas.drawCharacter(col, row, cell.chars[0]);
-      return;
     }
   }
-
-  // If no character, it's already cleared (black rectangle drawn above)
-  logger.debugf("SoftCursor::hide - cell cleared");
 }
