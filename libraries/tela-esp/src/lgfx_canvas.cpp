@@ -62,14 +62,16 @@ void LGFXCanvas::drawCharacter(int16_t x, int16_t y, char c)
     return;
   }
 
+  int pixel_x = x * char_width;
+  int pixel_y = y * char_height;
+
   if(c == ' ')
   {
-    screen->drawChar(x * char_width, y * char_height, c, TFT_BLACK, TFT_BLACK, 1);
+    screen->fillRect(pixel_x, pixel_y, char_width, char_height, TFT_BLACK);
   }
   else
   {
-    //screen->drawChar(x * char_width, y * char_height, c, TFT_BLACK, fg_color, 1);
-    screen->drawChar(x * char_width, y * char_height, c, TFT_BLACK, TFT_WHITE, 1);
+    screen->drawChar(pixel_x, pixel_y, c, TFT_WHITE, TFT_BLACK, 1);
   }
 }
 
