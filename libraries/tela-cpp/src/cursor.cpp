@@ -106,8 +106,8 @@ void Cursor::setPosition(int newCol, int newRow)
 
 void Cursor::update()
 {
-  // Handle blinking if enabled and not paused
-  if(set_visible && set_blinking)
+  // Handle blinking if enabled
+  if(set_visible && set_blinking && !force_invisible)
   {
     if(clock.now() - blink_start_time > blink_duration)
     {
@@ -116,7 +116,7 @@ void Cursor::update()
       // Toggle blink phase
       blinking_visible = !blinking_visible;
 
-      // Actually show or hide the cursor
+      // Actually show or hide based on blink state
       if(blinking_visible)
       {
         show();
@@ -127,4 +127,43 @@ void Cursor::update()
       }
     }
   }
+}
+
+void Cursor::setForceInvisible(bool force)
+{
+  if(force_invisible != force)
+  {
+    force_invisible = force;
+
+    if(force)
+    {
+      // Being forced invisible - hide it
+      hide();
+    }
+    else if(shouldBeVisible())
+    {
+      // No longer forced invisible and should be visible - show it
+      show();
+    }
+  }
+}
+
+bool Cursor::shouldBeVisible() const
+{
+  if(force_invisible)
+  {
+    return false;
+  }
+
+  if(!set_visible)
+  {
+    return false;
+  }
+
+  if(set_blinking && !blinking_visible)
+  {
+    return false;
+  }
+
+  return true;
 }

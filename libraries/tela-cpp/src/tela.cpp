@@ -437,7 +437,24 @@ int move(VTermRect dest, VTermRect src, void *user)
     return 0;
   }
 
-  return Tela::instance->canvas.move(src.start_col, src.start_row, src.end_col, src.end_row, dest.start_col, dest.start_row, dest.end_col, dest.end_row);
+  // Hide cursor during scroll
+  if(Tela::instance->cursor)
+  {
+    Tela::instance->cursor->setForceInvisible(true);
+  }
+
+  int result = Tela::instance->canvas.move(src.start_col, src.start_row,
+                                            src.end_col, src.end_row,
+                                            dest.start_col, dest.start_row,
+                                            dest.end_col, dest.end_row);
+
+  // Restore cursor
+  if(Tela::instance->cursor)
+  {
+    Tela::instance->cursor->setForceInvisible(false);
+  }
+
+  return result;
 }
 
 int pushline(int cols, const VTermScreenCell *cells, void *user)

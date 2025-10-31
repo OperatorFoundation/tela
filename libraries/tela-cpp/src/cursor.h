@@ -30,6 +30,7 @@ class Cursor
     void setVisible(bool visible);      // Terminal wants cursor visible/hidden
     void setBlinking(bool blinking);    // Terminal wants cursor blinking/steady
     void setShape(int shape);
+    void setForceInvisible(bool forceInvisible); // This is for use by Canvas to turn of the cursor when scrolling.
 
     void update();
 
@@ -49,6 +50,9 @@ class Cursor
     // Blink cycle state
     bool blinking_visible = false;      // Currently in "on" phase of blink
     int blink_start_time = 0;
+
+    bool force_invisible = false;      // This is for the Canvas to turn off the cursor when scrolling.
+    bool shouldBeVisible() const;
 
     // Platform-specific implementations
     virtual void show() = 0;            // Draw cursor on screen
