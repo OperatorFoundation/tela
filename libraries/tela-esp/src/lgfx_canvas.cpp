@@ -92,15 +92,19 @@ void LGFXCanvas::setFont(int fontNumber)
   {
     case 0:
       screen->setFont(&fonts::Font0);
+      break;
 
     case 1:
       screen->setFont(&fonts::TomThumb);
+      break;
 
     case 2:
       screen->setFont(&fonts::Font8x8C64);
+      break;
 
     case 3:
       screen->setFont(&fonts::Font2);
+      break;
 
     default:
       return;
