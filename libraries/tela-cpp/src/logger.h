@@ -29,6 +29,9 @@ class Logger
     void infof(const char *, ...);
     void debug(const char *);
     void debugf(const char *, ...);
+    void error(const char *);
+    void errorf(const char *, ...);
+
     void setLevel(Level level);
 
   protected:

@@ -41,6 +41,23 @@ void Logger::debugf(const char *format, ...)
   log(Level::DEBUG, buffer);
 }
 
+void Logger::error(const char *cs)
+{
+  log(Level::ERROR, cs);
+}
+
+void Logger::errorf(const char *format, ...)
+{
+  char buffer[256];  // Adjust size as needed
+
+  va_list args;
+  va_start(args, format);
+  vsnprintf(buffer, sizeof(buffer), format, args);
+  va_end(args);
+
+  log(Level::ERROR, buffer);
+}
+
 void Logger::setLevel(Level newLevel)
 {
   threshold = newLevel;
