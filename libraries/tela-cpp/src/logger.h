@@ -37,7 +37,7 @@ class Logger
   protected:
     Level threshold = Level::INFO;
 
-    void log(Level logLevel, const char *cs);
+    virtual void log(Level logLevel, const char *cs);
     virtual void write(const char *cs);
 };
 
