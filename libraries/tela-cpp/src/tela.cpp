@@ -28,7 +28,7 @@ void Tela::begin()
   vt = vterm_new(cols, rows);
   if (!vt)
   {
-    logger.debugf("fatal error, vterm_new failed");
+    logger.debug("fatal error, vterm_new failed");
     return;
   }
 
@@ -71,8 +71,6 @@ void Tela::begin()
 
 void Tela::process(std::vector<char> bs)
 {
-  logger.debug("TelaVterm::process");
-
   vterm_input_write(instance->vt, bs.data(), bs.size());
 }
 
@@ -272,8 +270,6 @@ int redraw(VTermRect rect, void *user)
     return -1;
   }
 
-  Tela::instance->logger.debugf("redraw %d:%d %d:%d", rect.start_col, rect.end_col, rect.start_row, rect.end_row);
-
   // A rectangle from (start_row,start_col) to (end_row,end_col) changed
   for (int row = rect.start_row; row < rect.end_row; row++)
   {
@@ -293,12 +289,10 @@ int redraw(VTermRect rect, void *user)
       // Print the character
       if(cellFilled && cell.chars[0] != 0)
       {
-        Tela::instance->logger.debugf("redraw:%c %d,%d", cell.chars[0], col, row);
         Tela::instance->canvas.drawCharacter(col, row, cell.chars[0]);
       }
       else
       {
-        Tela::instance->logger.debugf("redraw:(empty) %d,%d", col, row);
         Tela::instance->canvas.drawCharacter(col, row, ' ');
       }
     }
@@ -315,14 +309,10 @@ int move_cursor(VTermPos pos, VTermPos oldpos, int visible, void *user)
     return -1;
   }
 
-  Tela::instance->logger.debug("move_cursor begin");
-
   if(Tela::instance->cursor)
   {
     Tela::instance->cursor->setPosition(pos.col, pos.row);
   }
-
-  Tela::instance->logger.debug("move_cursor end");
 
   return 1;
 }
@@ -410,9 +400,6 @@ void on_output(const char *cs, size_t len, void *user)
     return;
   }
 
-  Tela::instance->logger.info("on_output");
-
-  Tela::instance->logger.infof("on_output: %zu bytes: ", len);
   for (size_t i = 0; i < len; i++) {
     unsigned char byte = cs[i];
     if (byte == 0x1B) {
@@ -464,8 +451,6 @@ int pushline(int cols, const VTermScreenCell *cells, void *user)
     return 0;
   }
 
-  Tela::instance->logger.debugf("sb_pushline: saving line with %d cols", cols);
-
   // Create a new scrollback line
   ScrollbackLine line;
   line.cols = cols;
@@ -500,15 +485,11 @@ int popline(int cols, VTermScreenCell *cells, void *user)
   // Check if we have any lines in the scrollback buffer
   if(Tela::instance->scrollback_buffer.empty())
   {
-    Tela::instance->logger.debugf("sb_popline: no lines in scrollback");
     return 0;  // No lines available
   }
 
   // Get the most recent line from scrollback
   ScrollbackLine& line = Tela::instance->scrollback_buffer.back();
-
-  Tela::instance->logger.debugf("sb_popline: retrieving line with %d cols (requested %d)",
-      line.cols, cols);
 
   // Copy the cells to the provided buffer
   int copy_cols = (line.cols < cols) ? line.cols : cols;
