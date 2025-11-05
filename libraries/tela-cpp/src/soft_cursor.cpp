@@ -8,8 +8,6 @@ SoftCursor::SoftCursor(Clock& clock, Canvas& canvas, Logger& logger) : Cursor(cl
 
 void SoftCursor::show()
 {
-  logger.debugf("SoftCursor::show@(%d,%d)", col, row);
-
   int char_width = canvas.getCharWidth();
   int char_height = canvas.getCharHeight();
   int pixel_x = col * char_width;
@@ -37,8 +35,6 @@ void SoftCursor::show()
 
 void SoftCursor::hide()
 {
-  logger.debugf("SoftCursor::hide@(%d,%d)", col, row);
-
   int char_width = canvas.getCharWidth();
   int char_height = canvas.getCharHeight();
   int pixel_x = col * char_width;
@@ -61,7 +57,6 @@ void SoftCursor::hide()
 
     if(result && cell.chars[0])
     {
-      logger.debugf("SoftCursor::hide - redrawing char: %c", cell.chars[0]);
       canvas.drawCharacter(col, row, cell.chars[0]);
     }
   }
