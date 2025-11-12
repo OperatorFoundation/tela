@@ -9,7 +9,7 @@ include_directories(${TELA_LIB_SOURCE_DIR} ${GFX_DIR} ${DVHSTX_DIR})
 set(SKETCH_FILE ${TELA_ARDUINO_1BIT_DIR}/tela-arduino-1bit.ino)
 
 set(BOARD "esp32:esp32:esp32s3")
-set(PORT "/dev/cu.usbmodem1101")
+set(PORT "/dev/cu.wchusbserial110")
 
 set(OUTPUT_DIR ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/arduino/rp2350/tela-arduino)
 file(GLOB_RECURSE TELA_FILES ${TELA_LIB_SOURCE_DIR}/*.cpp ${TELA_ARDUINO_SOURCE_DIR}/*.cpp ${TELA_ARDUINO_SOURCE_DIR}/*.cpp)
@@ -25,7 +25,7 @@ add_custom_target(build_tela_arduino ALL
             --library ${TRANSMISSION_LIB_DIR}
             --library ${TRANSMISSION_ARDUINO_DIR}
             --library ${TELA_LIB_DIR}
-	    --library ${TELA_ARDUINO_DIR}
+	    			--library ${TELA_ARDUINO_DIR}
             --library ${TELA_ESP_DIR}
             ${SKETCH_FILE}
         WORKING_DIRECTORY ${TELA_ARDUINO_SOURCE_DIR}

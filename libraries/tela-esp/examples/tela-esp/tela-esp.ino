@@ -69,6 +69,7 @@ void setup()
   Serial.println("Screen initialized");
 
   canvas.begin(&screen);
+  canvas.setFont(3);
 
   Serial.println("canvas initialized");
 
@@ -95,11 +96,12 @@ void loop()
   std::vector<char> input = usb.read();
   if(!input.empty())
   {
-    serial1->write(input);
+    //serial1->write(input);
+    usb.write(input);
 
     // FIXME - remove these debug lines
-    //tela.process(input);
-    //tela.update();
+    tela.process(input);
+    tela.update();
   }
 
   // FIXME - debugging, remove
