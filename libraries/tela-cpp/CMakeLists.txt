@@ -5,6 +5,7 @@ enable_testing()
 include_directories(${TELA_LIB_SOURCE_DIR}
   ${VTERM_LIB_SOURCE_DIR}
   ${TRANSMISSION_LIB_DIR}/src
+  ${ONDA}/src
 )
 
 file(GLOB_RECURSE TELA_FILES 
@@ -16,5 +17,6 @@ target_include_directories(tela-cpp PUBLIC
   ${TELA_LIB_SOURCE_DIR}
   ${VTERM_LIB_SOURCE_DIR}
   ${TRANSMISSION_LIB_DIR}/src
+  ${ONDA}/src
 )
 

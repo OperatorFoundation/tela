@@ -31,6 +31,8 @@ add_custom_target(build_tela_esp ALL
             --library ${TELA_LIB_DIR}
             --library ${TELA_ARDUINO_DIR}
             --library ${TELA_ESP_DIR}
+            --library ${ONDA}
+            --library ${ONDA_ARDUINO}
             ${SKETCH_FILE}
         WORKING_DIRECTORY ${TELA_ESP_SOURCE_DIR}
         COMMENT "Building tela-esp with arduino-cli"
