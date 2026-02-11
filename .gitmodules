@@ -13,3 +13,6 @@
 [submodule "lib/cmake-helpers"]
 	path = lib/cmake-helpers
 	url = https://github.com/OperatorFoundation/cmake-helpers.git
+[submodule "lib/fonte"]
+	path = lib/fonte
+	url = https://codeberg.org/curiosa/fonte.git

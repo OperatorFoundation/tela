@@ -147,6 +147,16 @@ int LGFXCanvas::getCharHeight()
   return char_height;
 }
 
+void LGFXCanvas::setRotation(int choice)
+{
+  if(screen == nullptr)
+  {
+    return;
+  }
+
+  screen->setRotation(choice);
+}
+
 uint16_t LGFXCanvas::getFgColor()
 {
   return fg_color;

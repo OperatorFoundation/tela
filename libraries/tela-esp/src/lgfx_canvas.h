@@ -42,6 +42,8 @@ class LGFXCanvas : public Canvas
     uint16_t getHeight() override;
     uint16_t getWidth() override;
 
+	void setRotation(int choice) override;
+
     void drawCharacter(int16_t x, int16_t y, char c) override;
     void fill(uint16_t color) override;
     void setFont(int fontNumber) override;

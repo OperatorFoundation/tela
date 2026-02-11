@@ -18,6 +18,8 @@ class Canvas
     virtual uint16_t getHeight() = 0;
     virtual uint16_t getWidth() = 0;
 
+    virtual void setRotation(int choice) = 0;
+
     // Coordinates are in characters
     virtual void drawCharacter(int16_t x, int16_t y, char c) = 0;
     virtual void fill(uint16_t color) = 0;
