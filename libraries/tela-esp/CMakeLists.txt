@@ -7,7 +7,7 @@ set(TELA_ESP_SKETCH_NAME tela-esp)
 set(SKETCH_FILE ${TELA_ESP_DIR}/examples/${TELA_ESP_SKETCH_NAME}/${TELA_ESP_SKETCH_NAME}.ino)
 
 set(BOARD "esp32:esp32:esp32s3")
-set(PORT "/dev/cu.wchusbserial110")
+set(PORT "/dev/cu.usbmodem11301")
 set(REMOTE_PORT "/dev/ttyUSB0")
 
 set(OUTPUT_DIR ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/esp32s3/${TELA_ESP_SKETCH_NAME})
@@ -22,7 +22,7 @@ add_custom_target(build_tela_esp ALL
             --output-dir ${OUTPUT_DIR}
             --build-property "compiler.cpp.extra_flags=-std=c++17 -D_BSD_SOURCE -D_DEFAULT_SOURCE"
             --build-property "compiler.cpp.extra_flags=${CMAKE_CXX__FLAGS_DEBUG}"
-            --board-options "PSRAM=opi"
+            --board-options "PSRAM=opi,USBMode=hwcdc"
             --library ${GFX_DIR}
             --library ${VTERM_DIR}
             --library ${TRANSMISSION_LIB_DIR}
@@ -42,6 +42,7 @@ add_custom_target(upload_tela_esp
         COMMAND arduino-cli upload
         -p ${PORT}
         --fqbn ${BOARD}
+        --upload-field before=default_reset
         ${SKETCH_FILE}
         COMMENT "Uploading tela-esp with arduino-cli"
 )
