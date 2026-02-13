@@ -22,8 +22,8 @@ add_custom_target(build_tela_arduino ALL
             --build-property "compiler.cpp.extra_flags=${CMAKE_CXX__FLAGS_DEBUG}"
             --library ${GFX_DIR}
             --library ${VTERM_DIR}
-            --library ${TRANSMISSION_LIB_DIR}
-            --library ${TRANSMISSION_ARDUINO_DIR}
+            --library ${TRANSMISSION}
+            --library ${TRANSMISSION_ARDUINO}
             --library ${TELA_LIB_DIR}
 	    			--library ${TELA_ARDUINO_DIR}
             --library ${TELA_ESP_DIR}

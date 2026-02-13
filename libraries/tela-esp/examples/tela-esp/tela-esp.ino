@@ -27,11 +27,11 @@ Lesson	link:	https://www.youtube.com/watch?v=WHfPH-Kr9XU
 LGFX screen;
 LGFXCanvas canvas = LGFXCanvas();
 ReliableConnectionUsbCdc usb = ReliableConnectionUsbCdc();
-ReliableConnectionSerial1* serial1 = ReliableConnectionSerial1::getInstance();
+ReliableConnectionSerial1 serial1 = ReliableConnectionSerial1();
 ArduinoClock ticker = ArduinoClock();
 SerialLogger logger = SerialLogger();
 SoftCursor cursor = SoftCursor(ticker, canvas, logger);
-Tela tela(canvas, serial1, ticker, logger, &cursor);
+Tela tela(canvas, &serial1, ticker, logger, &cursor);
 
 int lastType = 0;
 int waitTime = 0;
@@ -54,8 +54,8 @@ void setup()
 
   Serial.println("usb initialized");
 
-  serial1->enableXonXoff();
-  serial1->begin();
+  serial1.enableXonXoff();
+  serial1.begin();
 
   Serial.println("serial1 initialized");
 
@@ -84,7 +84,7 @@ void setup()
 
 void loop()
 {
-  std::vector<char> output = serial1->read();
+  std::vector<char> output = serial1.read();
   if(!output.empty())
   {
     tela.process(output);

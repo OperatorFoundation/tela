@@ -25,9 +25,9 @@ add_custom_target(build_tela_esp ALL
             --board-options "PSRAM=opi,USBMode=hwcdc"
             --library ${GFX_DIR}
             --library ${VTERM_DIR}
-            --library ${TRANSMISSION_LIB_DIR}
-            --library ${TRANSMISSION_ARDUINO_DIR}
-            --library ${TRANSMISSION_ESP32_DIR}
+            --library ${TRANSMISSION}
+            --library ${TRANSMISSION_ARDUINO}
+            --library ${TRANSMISSION_ESP32}
             --library ${TELA_LIB_DIR}
             --library ${TELA_ARDUINO_DIR}
             --library ${TELA_ESP_DIR}
