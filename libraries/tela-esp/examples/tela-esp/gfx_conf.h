@@ -31,10 +31,22 @@ class LGFX : public lgfx::LGFX_Device
 public:
     lgfx::Bus_RGB _bus_instance;
     lgfx::Panel_RGB _panel_instance;
+    lgfx::Light_PWM _light_instance;
     lgfx::Touch_GT911 _touch_instance;
 
     LGFX(void)
     {
+        {
+            auto cfg = _panel_instance.config();
+            cfg.memory_width  = screenWidth;
+            cfg.memory_height = screenHeight;
+            cfg.panel_width   = screenWidth;
+            cfg.panel_height  = screenHeight;
+            cfg.offset_x = 0;
+            cfg.offset_y = 0;
+            _panel_instance.config(cfg);
+        }
+
         {
             auto cfg = _bus_instance.config();
             cfg.panel = &_panel_instance;
@@ -62,7 +74,7 @@ public:
             cfg.pin_vsync   = GPIO_NUM_41;
             cfg.pin_hsync   = GPIO_NUM_39;
             cfg.pin_pclk    = GPIO_NUM_0;
-            cfg.freq_write  = 15000000;
+            cfg.freq_write  = 12000000;
 
             cfg.hsync_polarity    = 0;
             cfg.hsync_front_porch = 8;
@@ -79,20 +91,15 @@ public:
             cfg.pclk_idle_high  = 0;
 
             _bus_instance.config(cfg);
+            _panel_instance.setBus(&_bus_instance);
         }
 
         {
-            auto cfg = _panel_instance.config();
-            cfg.memory_width  = screenWidth;
-            cfg.memory_height = screenHeight;
-            cfg.panel_width   = screenWidth;
-            cfg.panel_height  = screenHeight;
-            cfg.offset_x = 0;
-            cfg.offset_y = 0;
-            _panel_instance.config(cfg);
+            auto cfg = _light_instance.config();
+            cfg.pin_bl = GPIO_NUM_2;
+            _light_instance.config(cfg);
+            _panel_instance.light(&_light_instance);
         }
-
-        _panel_instance.setBus(&_bus_instance);
 
         {
             auto cfg = _touch_instance.config();
