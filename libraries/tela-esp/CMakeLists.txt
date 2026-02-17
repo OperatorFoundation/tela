@@ -17,13 +17,13 @@ set(SCREEN_CONFIGS "basic_5;advance_5")
 # Per-config settings
 # Basic 5": ESP32-S3, 4MB flash, no PSRAM, ILI6122/ILI5960
 set(BOARD_basic_5 "esp32:esp32:esp32s3")
-set(BOARD_OPTIONS_basic_5 "PSRAM=opi,USBMode=hwcdc,FlashSize=4M")
+set(BOARD_OPTIONS_basic_5 "PSRAM=opi,USBMode=hwcdc,FlashSize=4M,PartitionScheme=huge_app")
 set(FLASH_SIZE_basic_5 "4MB")
 set(EXPECTED_PSRAM_basic_5 "true")
 
 # Advance 5": ESP32-S3, 16MB flash, 8MB PSRAM, ST7262
 set(BOARD_advance_5 "esp32:esp32:esp32s3")
-set(BOARD_OPTIONS_advance_5 "PSRAM=opi,USBMode=hwcdc,FlashSize=16M")
+set(BOARD_OPTIONS_advance_5 "PSRAM=opi,USBMode=hwcdc,FlashSize=16M,PartitionScheme=no_ota")
 set(FLASH_SIZE_advance_5 "16MB")
 set(EXPECTED_PSRAM_advance_5 "true")
 
